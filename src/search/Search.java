@@ -7,11 +7,11 @@ public class Search {
         int i = 1;
         String longest = a.get(pos);
         String current;
-        
+
         /*
-        Invariant: 1 ≤ i ≤ n and longest is longest word of a[0] ... a[i-1]
+        Invariant: 1 ≤ i ≤ n, longest is longest word of a[0] ... a[i-1]
         and pos is the position of longest.
-        */
+         */
         
         while (i < a.size()) {
             current = a.get(i);
@@ -29,11 +29,11 @@ public class Search {
         String current;
         int unique = 1;
         int i = 1;
-        
+
         /*
-        Invariant: 0 ≤ i ≤ a.size() and unique = number of unique elements
+        Invariant: 0 ≤ i ≤ n and unique = number of unique elements
         from a[0] ... a[i-1]
-        */
+         */
         
         while (i < a.size()) {
             current = a.get(i);
@@ -56,6 +56,12 @@ public class Search {
         String current;
         String prev = a.get(i - 1);
         
+        /*
+        Invariant: 0 ≤ i ≤ n and freq = frequency of the current word being 
+        checked. mostFrequent is the frequency of the most frequent word from a[0]...a[i].
+        mostFrequentIndex is the index of said word.
+         */
+
         while (i < a.size()) {
             current = a.get(i);
             if (current.equals(prev)) {
@@ -79,9 +85,9 @@ public class Search {
         int high = a.size() - 1;
         int mid;
         String current;
-        
+
         /*
-        invariant: 0 ≤ low ≤ high+1 ≤ a.size() and a[0..low-1] < k < a[high+1..n-1]
+        invariant: 0 ≤ low ≤ high+1 ≤ n and a[0..low-1] < k < a[high+1..n-1]
         */
         
         while (low <= high) {
@@ -102,6 +108,11 @@ public class Search {
         int low = 0;
         int high = a.size() - 1;
         int mid;
+
+        /*
+        invariant: 0 ≤ low ≤ high+1 ≤ n and a[0..low-1] < k ≤ a[high+1..n-1]
+        */
+        
         while (low <= high) {
             mid = (high + low) / 2;
             if (a.get(mid).compareTo(k) < 0) {
@@ -117,6 +128,10 @@ public class Search {
         int low = 0;
         int high = a.size() - 1;
         int mid;
+        
+        /*
+        invariant: 0 ≤ low ≤ high+1 ≤ n and a[0..low-1] < k ≤ a[high+1..n-1]
+        */
 
         while (low <= high) {
             mid = (high + low) / 2;
@@ -135,6 +150,10 @@ public class Search {
         int high = a.size() - 1;
         int mid;
 
+        /*
+        invariant: 0 ≤ low ≤ high+1 ≤ n and a[0..low-1] < k1 < a[high+1..n-1]
+        */
+        
         while (low <= high) {
             mid = (high + low) / 2;
             if (a.get(mid).compareTo(k1) < 0) {
@@ -147,6 +166,11 @@ public class Search {
 
         low = 0;
         high = a.size() - 1;
+        
+        /*
+        invariant: 0 ≤ low ≤ high+1 ≤ n and a[0..low-1] < k2 < a[high+1..n-1]
+        */
+        
         while (low <= high) {
             mid = (high + low) / 2;
             if (a.get(mid).compareTo(k2) > 0) {
@@ -162,6 +186,10 @@ public class Search {
 
     public int countMatches(StringList a, String prefix, String substring) {
         int matches = 0;
+        
+        /*
+        invariant: 0 ≤ low ≤ high+1 ≤ n and a[0..low-1] < prefix < a[high+1..n-1]
+        */
 
         int low = 0;
         int high = a.size() - 1;
@@ -174,22 +202,26 @@ public class Search {
                 high = mid - 1;
             }
         }
-        
+
         boolean flag = true;
         String current;
+
+        /*
+        invariant: 0 ≤ low ≤ n and matches = number of matches from a[low] to a[n-1]
+        */
         
-        while(flag){
+        while (flag && low < a.size()) {
             current = a.get(low);
-            if(current.startsWith(prefix)){
-                if (current.contains(substring)){
+            if (current.startsWith(prefix)) {
+                if (current.contains(substring)) {
                     matches++;
                 }
-            }else{
+            } else {
                 flag = false;
             }
             low++;
         }
-        
+
         return matches;
     }
 }

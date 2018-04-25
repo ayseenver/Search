@@ -21,7 +21,7 @@ public class SearchTest {
         // You can set this to any of the text files in the data folder
         final FileStrings strings = new FileStrings("data/large.txt");
 
-        // add your tests here
+//        add your tests here
         System.out.println(search.longestWord(strings));
         System.out.println();
 
